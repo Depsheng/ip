@@ -7,6 +7,10 @@ public class Lala {
         String input = "";
         while (!input.equals("bye")) {
             input = sc.nextLine();
+            if (input.equals("list")) {
+                List.toPrint();
+                continue;
+            }
             echo echomsg =  new echo(input);
             echomsg.toPrint();
         }
