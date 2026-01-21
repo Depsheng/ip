@@ -1,18 +1,48 @@
 import java.util.*;
 
 public class List {
-    private static ArrayList<String> list =  new ArrayList<>();
+    private static ArrayList<Task> list =  new ArrayList<>(); // List to keep the list of Tasks
 
-    public static void add(String s){
-        list.add(s);
+    public static void add(String s){ // Add new Task depending on the description
+        list.add(new Task(s));
     }
 
-    public static void toPrint() {
+    public static void mark(int n) { //to mark task as done and display message
+        if (n >= 0 && n <= list.size()) {
+            Task t =  list.get(n - 1);
+            System.out.println("____________________________________________________________");
+            System.out.println("Nice! I've marked this task as done:");
+            t.set(true);
+            System.out.println(t.getDescription());
+            System.out.println("____________________________________________________________");
+        } else {
+            System.out.println("__________________________________________________________");
+            System.out.println("Sorry! There is no such task.");
+            System.out.println("____________________________________________________________");
+        }
+    }
+
+    public static void unmark(int n) {//to mark task as not done and display message
+        if (n >= 0 && n <= list.size()) {
+            Task t =  list.get(n - 1);
+            System.out.println("____________________________________________________________");
+            System.out.println("OK, I've marked this task as not done yet:");
+            t.set(false);
+            System.out.println(t.getDescription());
+        } else {
+            System.out.println("__________________________________________________________");
+            System.out.println("Sorry! There is no such task.");
+            System.out.println("____________________________________________________________");
+        }
+    }
+
+    public static void toPrint() { //print the list of tasks
         int len = list.size();
         System.out.println("____________________________________________________________");
         for (int i = 0; i < len ; i++) {
+            Task t = list.get(i);
             String num = Integer.toString(i + 1);
-            System.out.println(num + ". " + list.get(i));
+            System.out.println(num + "." + t.getDescription());
         }
         System.out.println("____________________________________________________________");
     }

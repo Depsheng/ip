@@ -7,8 +7,17 @@ public class Lala {
         String input = "";
         while (!input.equals("bye")) {
             input = sc.nextLine();
+            String[] words = input.split(" ");
             if (input.equals("list")) {
                 List.toPrint();
+                continue;
+            } else if (words[0].equals("mark")) {
+                int n =  Integer.parseInt(words[1]);
+                List.mark(n);
+                continue;
+            } else if (words[0].equals("unmark")){
+                int  n = Integer.parseInt(words[1]);
+                List.unmark(n);
                 continue;
             }
             echo echomsg =  new echo(input);
@@ -18,4 +27,6 @@ public class Lala {
         Bye.printBye();
 
     }
+
+    public static void wordCheck(String input) {}
 }

@@ -1,0 +1,24 @@
+public class Task {
+    private String description; //description of Task
+    private boolean isDone; //whether the Task is marked as Done
+    public Task(String description) { //Constructor of Task
+        this.description = description;
+        isDone = false;
+    }
+    public String getDescription() { // To print out description of task and whether it is done
+        return this.getBoolean() + this.description;
+    }
+
+    public String getBoolean() { //Responsible for printing the [ ] whether done or not
+        if (this.isDone) {
+            return "[X] ";
+        } else {
+            return "[ ] ";
+        }
+    }
+
+    public void set(boolean b) { // mark/unmark
+        this.isDone = b;
+    }
+
+}
