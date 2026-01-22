@@ -41,7 +41,7 @@ public class Event extends Task{
         return type + super.getDescription() + " " + this.from + this.deadline;
     }
 
-    public void toPrint() {
+    public void toPrint() { // print the action of adding the task
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
         List.add(this);

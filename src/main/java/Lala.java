@@ -36,6 +36,9 @@ public class Lala {
                     Event e = new Event(input);
                     e.toPrint();
                     continue;
+                } else if (words[0].equals("delete")) {
+                    int n = Integer.parseInt(words[1]);
+                    List.delete(n);
                 } else {
                     throw new NoSuchCommandException();
                 }

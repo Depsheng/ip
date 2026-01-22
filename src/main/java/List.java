@@ -36,6 +36,22 @@ public class List {
         }
     }
 
+    public static void delete(int n) {
+        if (n >= 0 && n <= list.size()) {
+            Task t =  list.get(n - 1);
+            System.out.println("____________________________________________________________");
+            System.out.println("Noted. I've removed this task:");
+            list.remove(n - 1);
+            System.out.println(t.getDescription());
+            System.out.println(getNum());
+            System.out.println("__________________________________________________________");
+        } else {
+            System.out.println("__________________________________________________________");
+            System.out.println("Sorry! There is no such task.");
+            System.out.println("____________________________________________________________");
+        }
+    }
+
     public static void toPrint() { //print the list of tasks
         int len = list.size();
         System.out.println("____________________________________________________________");
