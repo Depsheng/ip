@@ -40,7 +40,7 @@ public class Event extends Task{
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
         List.add(this);
-        System.out.println(this.getDescription());
+        System.out.println("  " + this.getDescription());
         System.out.println(List.getNum());
         System.out.println("____________________________________________________________");
     }

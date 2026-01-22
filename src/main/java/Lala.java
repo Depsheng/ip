@@ -5,8 +5,11 @@ public class Lala {
         Scanner sc = new Scanner(System.in);
         Welcome.printWelcome();
         String input = "";
-        while (!input.equals("bye")) {
+        while (true) {
             input = sc.nextLine();
+            if(input.equals("bye")) {
+                break;
+            }
             String[] words = input.split(" ");
             if (input.equals("list")) {
                 List.toPrint();
