@@ -1,6 +1,15 @@
 public class ToDo extends Task{
-    public ToDo(String description) { //calls super constructor
-        super(description.substring("todo ".length()));
+    public ToDo(String description) throws NoDescriptionException { //calls super constructor
+        super(extractDesc(description));
+    }
+
+    private static String extractDesc(String input) throws NoDescriptionException {
+        String desc = input.substring("todo".length()).trim();
+
+        if (desc.isEmpty()) {
+            throw new NoDescriptionException();
+        }
+        return desc;
     }
 
     @Override
