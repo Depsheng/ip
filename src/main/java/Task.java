@@ -5,6 +5,7 @@ public class Task {
         this.description = description;
         isDone = false;
     }
+
     public String getDescription() { // To print out description of task and whether it is done
         return this.getBoolean() + this.description;
     }

@@ -4,7 +4,7 @@ public class echo {
 
     public echo(String msg) { //constructor of echo and add the description into List
         this.echo_msg = msg;
-        List.add(msg);
+        List.add(new Task(msg));
     }
 
     public void toPrint() { //Print for task adding

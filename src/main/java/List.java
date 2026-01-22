@@ -3,8 +3,8 @@ import java.util.*;
 public class List {
     private static ArrayList<Task> list =  new ArrayList<>(); // List to keep the list of Tasks
 
-    public static void add(String s){ // Add new Task depending on the description
-        list.add(new Task(s));
+    public static void add(Task t) { // Add new Task depending on the description
+        list.add(t);
     }
 
     public static void mark(int n) { //to mark task as done and display message
@@ -45,6 +45,11 @@ public class List {
             System.out.println(num + "." + t.getDescription());
         }
         System.out.println("____________________________________________________________");
+    }
+
+    public static String getNum() {
+        String num = Integer.toString(list.size());
+        return "Now you have" + " " + num + " " + "tasks in the list.";
     }
 
 }

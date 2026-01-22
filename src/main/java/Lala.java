@@ -19,6 +19,18 @@ public class Lala {
                 int  n = Integer.parseInt(words[1]);
                 List.unmark(n);
                 continue;
+            } else if (words[0].equals("todo")) {
+                ToDo todo = new ToDo(input);
+                todo.toPrint();
+                continue;
+            } else if (words[0].equals("deadline")) {
+                Deadline dl = new Deadline(input);
+                dl.toPrint();
+                continue;
+            } else if (words[0].equals("event")) {
+                Event e = new Event(input);
+                e.toPrint();
+                continue;
             }
             echo echomsg =  new echo(input);
             echomsg.toPrint();
