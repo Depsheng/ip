@@ -9,6 +9,12 @@ public class Event extends Task{
         this.deadline = extractDeadline(description);
     }
 
+    public Event(String description, String from, String dl, boolean b) throws NoDescriptionException { //calls super constructor
+        super(description, b);
+        this.from = "(from: " + from;
+        this.deadline = " to: " + dl + ")";
+    }
+
     public static String extractDes(String input) throws NoDescriptionException { //extract the description from input
         String rest = input.substring("event".length());
         String[] str = rest.split("/from ");
@@ -44,12 +50,17 @@ public class Event extends Task{
     public void toPrint() { // print the action of adding the task
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
-        List.add(this);
         System.out.println("  " + this.getDescription());
-        System.out.println(List.getNum());
         System.out.println("____________________________________________________________");
     }
 
+    @Override
+    public String toFileString() {
+        String type = "T | ";
+        String from = " | " + this.from;
+        String by = " | " + this.deadline;
+        return type + super.toFileString() + from + by;
+    }
 
 
 

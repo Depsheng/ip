@@ -3,6 +3,10 @@ public class ToDo extends Task{
         super(extractDesc(description));
     }
 
+    public ToDo(String description, boolean b) throws NoDescriptionException { //calls super constructor
+        super(description, b);
+    }
+
     private static String extractDesc(String input) throws NoDescriptionException {
         String desc = input.substring("todo".length()).trim();
 
@@ -21,13 +25,15 @@ public class ToDo extends Task{
     public void toPrint() { //to Print when the input for todo is entered
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
-        List.add(this);
         System.out.println("  " + this.getDescription());
-        System.out.println(List.getNum());
         System.out.println("____________________________________________________________");
     }
 
-
+    @Override
+    public String toFileString() {
+        String type = "T | ";
+        return type + super.toFileString();
+    }
 
 
 }

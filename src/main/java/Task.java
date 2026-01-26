@@ -1,9 +1,14 @@
 public class Task {
     private String description; //description of Task
     private boolean isDone; //whether the Task is marked as Done
+
     public Task(String description) { //Constructor of Task
         this.description = description;
         isDone = false;
+    }
+    public Task(String description, boolean b) { //Constructor of Task
+        this.description = description;
+        isDone = b;
     }
 
     public String getDescription() { // To print out description of task and whether it is done
@@ -21,5 +26,10 @@ public class Task {
     public void set(boolean b) { // mark/unmark
         this.isDone = b;
     }
+
+    public String toFileString() {
+        String b = this.isDone ? "1" : "0";
+        return b + " | " + this.description;
+    };
 
 }

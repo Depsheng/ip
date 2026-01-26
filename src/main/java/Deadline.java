@@ -7,6 +7,11 @@ public class Deadline extends Task{
         this.deadline = extractDeadline(description);
     }
 
+    public Deadline(String description, String dl, boolean b) throws NoDescriptionException { //calls super constructor
+        super(description, b);
+        this.deadline = "(by: " + dl + ")";
+    }
+
     public static String extractDes(String input) throws NoDescriptionException { //extract the description from input
         String rest = input.substring("deadline".length());
         String[] str = rest.split("/by ");
@@ -33,10 +38,15 @@ public class Deadline extends Task{
     public void toPrint() { //toPrint function
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
-        List.add(this);
         System.out.println("  " + this.getDescription());
-        System.out.println(List.getNum());
         System.out.println("____________________________________________________________");
+    }
+
+    @Override
+    public String toFileString() {
+        String type = "T | ";
+        String by = " | " + this.deadline;
+        return type + super.toFileString() + by;
     }
 
 

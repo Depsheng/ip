@@ -1,10 +1,18 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Lala {
-    public static void main(String[] args) throws NoSuchCommandException, NoDescriptionException {
+    public static void main(String[] args) throws NoSuchCommandException, NoDescriptionException, IOException {
         Scanner sc = new Scanner(System.in);
         Welcome.printWelcome();
-        String input = "";
+        String input;
+        try {
+            List.loadFromTxt();
+            System.out.println("Loaded tasks!");
+        } catch (Exception e) {
+            System.out.println("Failed to load tasks: " + e.getMessage());
+            e.printStackTrace();
+        }
         while (true) {
             input = sc.nextLine();
             if (input.equals("bye")) {
@@ -15,27 +23,24 @@ public class Lala {
                 String[] words = input.split(" ");
                 if (input.equals("list")) {
                     List.toPrint();
-                    continue;
                 } else if (words[0].equals("mark")) {
                     int n = Integer.parseInt(words[1]);
                     List.mark(n);
-                    continue;
                 } else if (words[0].equals("unmark")) {
                     int n = Integer.parseInt(words[1]);
                     List.unmark(n);
-                    continue;
                 } else if (words[0].equals("todo")) {
-                    ToDo todo = new ToDo(input);
-                    todo.toPrint();
-                    continue;
+                    ToDo t= new ToDo(input);
+                    List.add(t);
+                    t.toPrint();
                 } else if (words[0].equals("deadline")) {
-                    Deadline dl = new Deadline(input);
-                    dl.toPrint();
-                    continue;
+                    Deadline t = new Deadline(input);
+                    List.add(t);
+                    t.toPrint();
                 } else if (words[0].equals("event")) {
-                    Event e = new Event(input);
-                    e.toPrint();
-                    continue;
+                    Event t = new Event(input);
+                    List.add(t);
+                    t.toPrint();
                 } else if (words[0].equals("delete")) {
                     int n = Integer.parseInt(words[1]);
                     List.delete(n);

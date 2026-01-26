@@ -1,4 +1,6 @@
+import java.io.*;
 import java.util.*;
+import java.nio.file.*;
 
 public class List {
     private static ArrayList<Task> list =  new ArrayList<>(); // List to keep the list of Tasks
@@ -6,6 +8,15 @@ public class List {
     public static void add(Task t) { // Add new Task depending on the description
         list.add(t);
     }
+
+    public static void loadFromTxt() throws NoDescriptionException {
+        try {
+            list = Storage.load();
+        } catch (IOException e) {
+            list = new ArrayList<>();
+        }
+    }
+    private static void saveToTxT() {}
 
     public static void mark(int n) { //to mark task as done and display message
         if (n >= 0 && n <= list.size()) {
@@ -60,6 +71,7 @@ public class List {
             String num = Integer.toString(i + 1);
             System.out.println(num + "." + t.getDescription());
         }
+        System.out.println(List.getNum());
         System.out.println("____________________________________________________________");
     }
 
