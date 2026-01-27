@@ -8,7 +8,7 @@ public class Lala {
         String input;
         try {
             List.loadFromTxt();
-            System.out.println("Loaded tasks!");
+            System.out.println(List.getNum());
         } catch (Exception e) {
             System.out.println("Failed to load tasks: " + e.getMessage());
             e.printStackTrace();

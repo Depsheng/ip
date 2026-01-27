@@ -1,5 +1,5 @@
 public class Task {
-    private String description; //description of Task
+    private final String description; //description of Task
     private boolean isDone; //whether the Task is marked as Done
 
     public Task(String description) { //Constructor of Task

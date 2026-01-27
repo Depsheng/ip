@@ -1,15 +1,23 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
-    String deadline;
+    LocalDate deadline;
+    LocalTime deadlineTime;
 
     public Deadline(String description) throws NoDescriptionException { //calls super constructor
         super(extractDes(description));
         this.deadline = extractDeadline(description);
+        this.deadlineTime = extractDeadlineTime(description);
     }
 
     public Deadline(String description, String dl, boolean b) throws NoDescriptionException { //calls super constructor
         super(description, b);
-        this.deadline = "(by: " + dl + ")";
+        String[] str = dl.split(", ");
+        this.deadline = LocalDate.parse(str[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.deadlineTime = LocalTime.parse(str[1], DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public static String extractDes(String input) throws NoDescriptionException { //extract the description from input
@@ -23,16 +31,25 @@ public class Deadline extends Task{
         return desc;
     }
 
-    private static String extractDeadline(String input) { // extract the deadline from input
+    private static LocalDate extractDeadline(String input) { // extract the deadline from input
         String rest = input.substring("deadline ".length());
         String[] parts = rest.split(" /by ");
-        return "(by: " + parts[1].trim() + ")";
+        String dl = parts[1].trim().split(" ")[0];//should be in DD-MM-YYYY HR:MN
+        return LocalDate.parse(dl, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    private static LocalTime extractDeadlineTime(String input) { // extract the deadline from input
+        String rest = input.substring("deadline ".length());
+        String[] parts = rest.split(" /by ");
+        String dl = parts[1].trim().split(" ")[1];//should be in DD-MM-YYYY HR:MN
+        return LocalTime.parse(dl, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     @Override
     public String getDescription() { //get Description of ToDo Task
         String type = "[D]";
-        return type + super.getDescription() + " " + this.deadline;
+        return type + super.getDescription() + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " + this.deadlineTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }
 
     public void toPrint() { //toPrint function
@@ -44,9 +61,10 @@ public class Deadline extends Task{
 
     @Override
     public String toFileString() {
-        String type = "T | ";
-        String by = " | " + this.deadline;
-        return type + super.toFileString() + by;
+        String type = "D | ";
+        String by = " | " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String byTime = ", " + this.deadlineTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return type + super.toFileString() + by + byTime;
     }
 
 
