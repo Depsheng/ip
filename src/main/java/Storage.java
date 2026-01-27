@@ -31,10 +31,10 @@ public class Storage {
         return tasks;
     }
 
-    public void save(ArrayList<Task> tasks) throws IOException {
+    public static void saveAll(ArrayList<Task> tasks) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (Task task : tasks) {
-                bw.write(task.toFileString());
+            for (Task t : tasks) {
+                bw.write(t.toFileString());
                 bw.newLine();
             }
         }

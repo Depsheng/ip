@@ -5,8 +5,13 @@ import java.nio.file.*;
 public class List {
     private static ArrayList<Task> list =  new ArrayList<>(); // List to keep the list of Tasks
 
-    public static void add(Task t) { // Add new Task depending on the description
+    public static void add(Task t) throws IOException { // Add new Task depending on the description
         list.add(t);
+        Storage.saveAll(list);
+    }
+
+    public static ArrayList<Task> getList() {
+        return list;
     }
 
     public static void loadFromTxt() throws NoDescriptionException {
@@ -18,7 +23,7 @@ public class List {
     }
     private static void saveToTxT() {}
 
-    public static void mark(int n) { //to mark task as done and display message
+    public static void mark(int n) throws IOException { //to mark task as done and display message
         if (n >= 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
             System.out.println("____________________________________________________________");
@@ -31,9 +36,10 @@ public class List {
             System.out.println("Sorry! There is no such task.");
             System.out.println("____________________________________________________________");
         }
+        Storage.saveAll(list);
     }
 
-    public static void unmark(int n) {//to mark task as not done and display message
+    public static void unmark(int n) throws IOException{//to mark task as not done and display message
         if (n >= 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
             System.out.println("____________________________________________________________");
@@ -45,6 +51,7 @@ public class List {
             System.out.println("Sorry! There is no such task.");
             System.out.println("____________________________________________________________");
         }
+        Storage.saveAll(list);
     }
 
     public static void delete(int n) {

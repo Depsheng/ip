@@ -1,18 +1,33 @@
-public class Event extends Task{
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-    String from;
-    String deadline;
+public class Event extends Task {
+
+    LocalDate from;
+    LocalTime fromTime;
+    LocalDate to;
+    LocalTime toTime;
 
     public Event(String description) throws NoDescriptionException { //calls super constructor
         super(extractDes(description));
-        this.from = extractFrom(description);
-        this.deadline = extractDeadline(description);
+        String[] str = description.split("/from ");
+        String fromString = str[1].split("/to ")[0].trim();
+        String toString = str[1].split("/to ")[1].trim();
+        this.from = extractDeadline(fromString);
+        this.fromTime = extractDeadlineTime(fromString);
+        this.to = extractDeadline(toString);
+        this.toTime = extractDeadlineTime(toString);
     }
 
     public Event(String description, String from, String dl, boolean b) throws NoDescriptionException { //calls super constructor
         super(description, b);
-        this.from = "(from: " + from;
-        this.deadline = " to: " + dl + ")";
+        String[] str1 = from.split(", ");
+        this.from = LocalDate.parse(str1[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.fromTime = LocalTime.parse(str1[1], DateTimeFormatter.ofPattern("HH:mm"));
+        String[] str2 = dl.split(", ");
+        this.to = LocalDate.parse(str2[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.toTime = LocalTime.parse(str2[1], DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public static String extractDes(String input) throws NoDescriptionException { //extract the description from input
@@ -26,26 +41,31 @@ public class Event extends Task{
         return desc;
     }
 
-    private static String extractFrom(String input) { // extract the deadline from input
-        String rest = input.substring("event ".length());
-        String[] str = rest.split(" /from ");
-        String[] parts = str[1].split(" /to ");
-        return "(from: " + parts[0].trim();
+    private static LocalDate extractDeadline(String input) { // extract the deadline from input
+//        String rest = input.substring("event ".length());
+//        String[] str = rest.split(" /from ");
+//        String[] parts = str[1].split(" /to ");
+//        return " to: " + parts[1].trim() + ")";
+        String[] parts = input.split(" ");
+        String dl = parts[0];//should be in DD-MM-YYYY
+        return LocalDate.parse(dl, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
-    private static String extractDeadline(String input) { // extract the deadline from input
-        String rest = input.substring("event ".length());
-        String[] str = rest.split(" /from ");
-        String[] parts = str[1].split(" /to ");
-        return " to: " + parts[1].trim() + ")";
+    private static LocalTime extractDeadlineTime(String input) { // extract the deadline from input
+        String[] parts = input.split(" ");
+        String dl = parts[1].trim();//should be in HR:MN
+        return LocalTime.parse(dl, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
 
     @Override
-    public String getDescription() { //get Description of ToDo Task
+    public String getDescription() { //get Description of Event Task
         String type = "[E]";
-        return type + super.getDescription() + " " + this.from + this.deadline;
-    }
+        return type + super.getDescription() + " (from: " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " + this.fromTime.format(DateTimeFormatter.ofPattern("HH:mm")) +
+                    " to: " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                            + " " + this.toTime.format(DateTimeFormatter.ofPattern("HH:mm"))+ ")";
+        }
 
     public void toPrint() { // print the action of adding the task
         System.out.println("____________________________________________________________");
@@ -56,12 +76,11 @@ public class Event extends Task{
 
     @Override
     public String toFileString() {
-        String type = "T | ";
-        String from = " | " + this.from;
-        String by = " | " + this.deadline;
-        return type + super.toFileString() + from + by;
+        String type = "E | ";
+        String by = " | " + this.from.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String byTime = ", " + this.fromTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        String to = " | " + this.to.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String toTime = ", " + this.toTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        return type + super.toFileString() + by + byTime + to + toTime;
     }
-
-
-
 }
