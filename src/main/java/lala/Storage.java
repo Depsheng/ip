@@ -1,3 +1,12 @@
+package lala;
+
+import lala.exception.NoDescriptionException;
+import lala.exception.NoSuchCommandException;
+import lala.task.Deadline;
+import lala.task.Event;
+import lala.task.Task;
+import lala.task.ToDo;
+
 import java.io.*;
 import java.util.*;
 import java.nio.file.*;

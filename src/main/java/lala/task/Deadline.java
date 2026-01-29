@@ -1,8 +1,12 @@
+package lala.task;
+
+import lala.exception.NoDescriptionException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     LocalDate deadline;
     LocalTime deadlineTime;

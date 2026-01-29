@@ -1,6 +1,15 @@
+package lala;
+
+import lala.exception.NoDescriptionException;
+import lala.exception.NoSuchCommandException;
+import lala.task.Deadline;
+import lala.task.Event;
+import lala.task.Task;
+import lala.task.ToDo;
+
+
 import java.io.*;
 import java.util.*;
-import java.nio.file.*;
 
 public class List {
     private static ArrayList<Task> list =  new ArrayList<>(); // List to keep the list of Tasks

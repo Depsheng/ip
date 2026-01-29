@@ -1,4 +1,8 @@
-public class ToDo extends Task{
+package lala.task;
+
+import lala.exception.NoDescriptionException;
+
+public class ToDo extends Task {
     public ToDo(String description) throws NoDescriptionException { //calls super constructor
         super(extractDesc(description));
     }
