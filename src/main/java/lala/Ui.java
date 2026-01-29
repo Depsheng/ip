@@ -1,5 +1,9 @@
 package lala;
 
+import lala.task.Task;
+
+import java.util.ArrayList;
+
 public class Ui {
     private static final String LINE = "____________________________________________________________";
 
@@ -48,4 +52,17 @@ public class Ui {
         System.out.println(msg);
         System.out.println(LINE);
     }
+
+    public void toPrintKey(ArrayList<Task> TaskList) { //print the list of tasks
+        int len = TaskList.size();
+        System.out.println(LINE);
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < len ; i++) {
+            Task t = TaskList.get(i);
+            String num = Integer.toString(i + 1);
+            System.out.println(num + "." + t.getDescription());
+        }
+        System.out.println(LINE);
+    }
 }
+

@@ -34,4 +34,8 @@ public class Task {
         return b + " | " + this.description;
     };
 
+    //checks if Description contains the keyword
+    public boolean hasKey(String key) {
+        return this.description.contains(key);
+    }
 }

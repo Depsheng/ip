@@ -5,6 +5,7 @@ import lala.task.Task;
 
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class List {
@@ -93,9 +94,32 @@ public class List {
         System.out.println(LINE);
     }
 
+    public static void toPrint(ArrayList<Task> TaskList) { //print the list of tasks
+        int len = TaskList.size();
+        System.out.println("____________________________________________________________");
+        for (int i = 0; i < len ; i++) {
+            Task t = list.get(i);
+            String num = Integer.toString(i + 1);
+            System.out.println(num + "." + t.getDescription());
+        }
+        System.out.println(List.getNum());
+        System.out.println("____________________________________________________________");
+    }
+
     public static String getNum() {
         String num = Integer.toString(list.size());
         return "Now you have" + " " + num + " " + "tasks in the list.";
     }
 
+
+    // finds all Task containing the keyword key
+    public static ArrayList<Task> findAll(String key) {
+        ArrayList<Task> keyList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).hasKey(key)) {
+                keyList.add(list.get(i));
+            }
+        }
+        return keyList;
+    }
 }

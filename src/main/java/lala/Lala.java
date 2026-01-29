@@ -5,8 +5,10 @@ import lala.exception.NoSuchCommandException;
 import lala.task.Deadline;
 import lala.task.Event;
 import lala.task.ToDo;
+import lala.task.Task;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Lala {
@@ -62,6 +64,9 @@ public class Lala {
                 } else if (words[0].equals("delete")) {
                     int n = Integer.parseInt(words[1]);
                     List.delete(n);
+                } else if (words[0].equals("find")) {
+                    ArrayList<Task> keywordList = List.findAll(words[1]);
+                    ui.toPrintKey(keywordList);
                 } else {
                     throw new NoSuchCommandException();
                 }
