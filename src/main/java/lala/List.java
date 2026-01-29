@@ -14,7 +14,8 @@ import java.util.*;
 public class List {
     private static ArrayList<Task> list =  new ArrayList<>(); // List to keep the list of Tasks
 
-    public static void add(Task t) throws IOException { // Add new Task depending on the description
+    // Add new Task depending on the description
+    public static void add(Task t) throws IOException {
         list.add(t);
         Storage.saveAll(list);
     }
@@ -23,6 +24,7 @@ public class List {
         return list;
     }
 
+    // load the tasks into list
     public static void loadFromTxt() throws NoDescriptionException {
         try {
             list = Storage.load();
@@ -32,7 +34,8 @@ public class List {
     }
     private static void saveToTxT() {}
 
-    public static void mark(int n) throws IOException { //to mark task as done and display message
+    //to mark task as done and display message
+    public static void mark(int n) throws IOException {
         if (n >= 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
             System.out.println("____________________________________________________________");
@@ -48,7 +51,8 @@ public class List {
         Storage.saveAll(list);
     }
 
-    public static void unmark(int n) throws IOException{//to mark task as not done and display message
+    // to mark task as not done and display message
+    public static void unmark(int n) throws IOException{
         if (n >= 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
             System.out.println("____________________________________________________________");
@@ -63,6 +67,7 @@ public class List {
         Storage.saveAll(list);
     }
 
+    // to delete task
     public static void delete(int n) {
         if (n >= 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
