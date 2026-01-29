@@ -1,3 +1,5 @@
+package lala.task;
+
 public class Task {
     private final String description; //description of Task
     private boolean isDone; //whether the Task is marked as Done

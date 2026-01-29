@@ -1,3 +1,11 @@
+package lala;
+
+import lala.exception.NoDescriptionException;
+import lala.exception.NoSuchCommandException;
+import lala.task.Deadline;
+import lala.task.Event;
+import lala.task.ToDo;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -10,14 +18,6 @@ public class Lala {
         this.storage = storage;
         list = new List();
         ui = new Ui();
-
-        try {
-            list.loadFromTxt();
-            System.out.println(List.getNum());
-        } catch (Exception e) {
-            System.out.println("Failed to load tasks: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 
 
@@ -25,6 +25,13 @@ public class Lala {
         Scanner sc = new Scanner(System.in);
         ui.showWelcome();
         String input;
+        try {
+            list.loadFromTxt();
+            System.out.println(List.getNum());
+        } catch (Exception e) {
+            System.out.println("Failed to load tasks: " + e.getMessage());
+            e.printStackTrace();
+        }
         while (true) {
             input = sc.nextLine();
             if (input.equals("bye")) {
