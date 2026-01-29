@@ -1,17 +1,14 @@
 package lala;
 
 import lala.exception.NoDescriptionException;
-import lala.exception.NoSuchCommandException;
-import lala.task.Deadline;
-import lala.task.Event;
 import lala.task.Task;
-import lala.task.ToDo;
 
 
 import java.io.*;
 import java.util.*;
 
 public class List {
+    private static final String LINE = "____________________________________________________________";
     private static ArrayList<Task> list =  new ArrayList<>(); // List to keep the list of Tasks
 
     public static void add(Task t) throws IOException { // Add new Task depending on the description
@@ -35,15 +32,15 @@ public class List {
     public static void mark(int n) throws IOException { //to mark task as done and display message
         if (n >= 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
-            System.out.println("____________________________________________________________");
+            System.out.println(LINE);
             System.out.println("Nice! I've marked this task as done:");
             t.set(true);
             System.out.println(t.getDescription());
-            System.out.println("____________________________________________________________");
+            System.out.println(LINE);
         } else {
-            System.out.println("__________________________________________________________");
+            System.out.println(LINE);
             System.out.println("Sorry! There is no such task.");
-            System.out.println("____________________________________________________________");
+            System.out.println(LINE);
         }
         Storage.saveAll(list);
     }
@@ -51,14 +48,14 @@ public class List {
     public static void unmark(int n) throws IOException{//to mark task as not done and display message
         if (n >= 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
-            System.out.println("____________________________________________________________");
+            System.out.println(LINE);
             System.out.println("OK, I've marked this task as not done yet:");
             t.set(false);
             System.out.println(t.getDescription());
         } else {
-            System.out.println("__________________________________________________________");
+            System.out.println(LINE);
             System.out.println("Sorry! There is no such task.");
-            System.out.println("____________________________________________________________");
+            System.out.println(LINE);
         }
         Storage.saveAll(list);
     }
@@ -66,29 +63,29 @@ public class List {
     public static void delete(int n) {
         if (n >= 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
-            System.out.println("____________________________________________________________");
+            System.out.println(LINE);
             System.out.println("Noted. I've removed this task:");
             list.remove(n - 1);
             System.out.println(t.getDescription());
             System.out.println(getNum());
-            System.out.println("__________________________________________________________");
+            System.out.println(LINE);
         } else {
-            System.out.println("__________________________________________________________");
+            System.out.println(LINE);
             System.out.println("Sorry! There is no such task.");
-            System.out.println("____________________________________________________________");
+            System.out.println(LINE);
         }
     }
 
     public static void toPrint() { //print the list of tasks
         int len = list.size();
-        System.out.println("____________________________________________________________");
+        System.out.println(LINE);
         for (int i = 0; i < len ; i++) {
             Task t = list.get(i);
             String num = Integer.toString(i + 1);
             System.out.println(num + "." + t.getDescription());
         }
         System.out.println(List.getNum());
-        System.out.println("____________________________________________________________");
+        System.out.println(LINE);
     }
 
     public static String getNum() {

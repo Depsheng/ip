@@ -15,8 +15,7 @@ public class Lala {
     private Ui ui;
 
     public Lala() throws IOException {
-        this.storage = storage;
-        list = new List();
+        this.storage = new Storage();
         ui = new Ui();
     }
 
@@ -26,7 +25,7 @@ public class Lala {
         ui.showWelcome();
         String input;
         try {
-            list.loadFromTxt();
+            List.loadFromTxt();
             System.out.println(List.getNum());
         } catch (Exception e) {
             System.out.println("Failed to load tasks: " + e.getMessage());
