@@ -19,6 +19,7 @@ public class Storage {
         doesFileExist();
     }
 
+    // checks if the file exists
     private static void doesFileExist() throws IOException {
         Path path = Paths.get(FILE_PATH);
         if (!Files.exists(path)) {
@@ -26,6 +27,7 @@ public class Storage {
         }
     }
 
+    // loads the tasks from input file and returns a List of Task objects
     public static ArrayList<Task> load() throws IOException, NoDescriptionException {
         ArrayList<Task> tasks = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -40,6 +42,7 @@ public class Storage {
         return tasks;
     }
 
+    // saves all tasks into input file currently in TaskList
     public static void saveAll(ArrayList<Task> tasks) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Task t : tasks) {
