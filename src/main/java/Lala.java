@@ -2,17 +2,29 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Lala {
-    public static void main(String[] args) throws NoSuchCommandException, NoDescriptionException, IOException {
-        Scanner sc = new Scanner(System.in);
-        Welcome.printWelcome();
-        String input;
+    private Storage storage;
+    private List list;
+    private Ui ui;
+
+    public Lala() throws IOException {
+        this.storage = storage;
+        list = new List();
+        ui = new Ui();
+
         try {
-            List.loadFromTxt();
+            list.loadFromTxt();
             System.out.println(List.getNum());
         } catch (Exception e) {
             System.out.println("Failed to load tasks: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+
+    public void run() throws NoSuchCommandException, NoDescriptionException, IOException {
+        Scanner sc = new Scanner(System.in);
+        ui.showWelcome();
+        String input;
         while (true) {
             input = sc.nextLine();
             if (input.equals("bye")) {
@@ -30,7 +42,7 @@ public class Lala {
                     int n = Integer.parseInt(words[1]);
                     List.unmark(n);
                 } else if (words[0].equals("todo")) {
-                    ToDo t= new ToDo(input);
+                    ToDo t = new ToDo(input);
                     List.add(t);
                     t.toPrint();
                 } else if (words[0].equals("deadline")) {
@@ -48,20 +60,18 @@ public class Lala {
                     throw new NoSuchCommandException();
                 }
             } catch (NoSuchCommandException e) { // command not recognised
-                System.out.println("____________________________________________________________");
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means.");
-                System.out.println("____________________________________________________________");
+                ui.showErrorUnknownCommand();
             } catch (NoDescriptionException e) { //catch exceptions where command is given with no description
-                System.out.println("____________________________________________________________");
-                System.out.println("☹ OOPS!!! The description of a task cannot be empty.");
-                System.out.println("____________________________________________________________");
+                ui.showErrorEmptyDescription();
             } catch (Exception e) { //catch other exceptions
-                System.out.println("____________________________________________________________");
-                System.out.println("☹ OOPS!!! Something went wrong: " + e.getMessage());
-                System.out.println("____________________________________________________________");
+                ui.showErrorGeneric(e.getMessage());
             }
 
         }
-        Bye.printBye();
+        ui.showBye();
+    }
+
+    public static void main(String[] args) throws NoSuchCommandException, NoDescriptionException, IOException {
+        new Lala().run();
     }
 }
