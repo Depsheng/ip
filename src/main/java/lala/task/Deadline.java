@@ -56,11 +56,9 @@ public class Deadline extends Task {
                 + " " + this.deadlineTime.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }
 
-    public void toPrint() { //toPrint function
-        System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + this.getDescription());
-        System.out.println("____________________________________________________________");
+    public String toPrint() { //toPrint function
+        return "Got it. I've added this task:" + "\n"
+                    + " " + this.getDescription();
     }
 
     @Override

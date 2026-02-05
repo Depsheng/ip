@@ -3,6 +3,8 @@ package lala.task;
 import lala.exception.NoDescriptionException;
 
 public class ToDo extends Task {
+
+
     public ToDo(String description) throws NoDescriptionException { //calls super constructor
         super(extractDesc(description));
     }
@@ -26,11 +28,10 @@ public class ToDo extends Task {
         return type + super.getDescription();
     }
 
-    public void toPrint() { //to Print when the input for todo is entered
-        System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + this.getDescription());
-        System.out.println("____________________________________________________________");
+    public String toPrint() { //toPrint function
+        return "Got it. I've added this task:" + "\n"
+                    + " " + this.getDescription();
+
     }
 
     @Override

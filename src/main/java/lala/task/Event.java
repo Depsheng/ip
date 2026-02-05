@@ -71,11 +71,9 @@ public class Event extends Task {
                             + " " + this.toTime.format(DateTimeFormatter.ofPattern("HH:mm"))+ ")";
         }
 
-    public void toPrint() { // print the action of adding the task
-        System.out.println("____________________________________________________________");
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + this.getDescription());
-        System.out.println("____________________________________________________________");
+    public String toPrint() { // print the action of adding the task
+        return "Got it. I've added this task:" + "\n"
+                + " " + this.getDescription();
     }
 
     @Override

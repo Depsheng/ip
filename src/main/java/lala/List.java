@@ -5,11 +5,9 @@ import lala.task.Task;
 
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class List {
-    private static final String LINE = "____________________________________________________________";
     private static ArrayList<Task> list =  new ArrayList<>(); // List to keep the list of Tasks
 
     // Add new Task depending on the description
@@ -33,78 +31,62 @@ public class List {
     private static void saveToTxT() {}
 
     //to mark task as done and display message
-    public static void mark(int n) throws IOException {
-        if (n >= 0 && n <= list.size()) {
+    public static String mark(int n) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        if (n > 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
-            System.out.println(LINE);
-            System.out.println("Nice! I've marked this task as done:");
             t.set(true);
-            System.out.println(t.getDescription());
-            System.out.println(LINE);
+            sb.append("Nice! I've marked this task as done:\n");
+            sb.append(t.getDescription()).append("\n");
         } else {
-            System.out.println(LINE);
-            System.out.println("Sorry! There is no such task.");
-            System.out.println(LINE);
+            sb.append("Sorry! There is no such task.\n");
         }
         Storage.saveAll(list);
+        return sb.toString();
     }
 
     // to mark task as not done and display message
-    public static void unmark(int n) throws IOException{
-        if (n >= 0 && n <= list.size()) {
+    public static String unmark(int n) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        if (n > 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
-            System.out.println(LINE);
-            System.out.println("OK, I've marked this task as not done yet:");
             t.set(false);
-            System.out.println(t.getDescription());
+            sb.append("OK, I've marked this task as not done yet:\n");
+            sb.append(t.getDescription()).append("\n");
         } else {
-            System.out.println(LINE);
-            System.out.println("Sorry! There is no such task.");
-            System.out.println(LINE);
+            sb.append("Sorry! There is no such task.\n");
         }
         Storage.saveAll(list);
+        return sb.toString();
     }
 
     // to delete task
-    public static void delete(int n) {
-        if (n >= 0 && n <= list.size()) {
+    public static String delete(int n) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        if (n > 0 && n <= list.size()) {
             Task t =  list.get(n - 1);
-            System.out.println(LINE);
-            System.out.println("Noted. I've removed this task:");
             list.remove(n - 1);
-            System.out.println(t.getDescription());
-            System.out.println(getNum());
-            System.out.println(LINE);
+            sb.append("Noted. I've removed this task:\n");
+            sb.append(t.getDescription()).append("\n");
+            sb.append(getNum());
         } else {
-            System.out.println(LINE);
-            System.out.println("Sorry! There is no such task.");
-            System.out.println(LINE);
+            sb.append("Sorry! There is no such task.\n");
         }
+        Storage.saveAll(list);
+        return  sb.toString();
     }
 
-    public static void toPrint() { //print the list of tasks
+    public static String toPrint() { //print the list of tasks
+        StringBuilder sb = new StringBuilder();
         int len = list.size();
-        System.out.println(LINE);
         for (int i = 0; i < len ; i++) {
             Task t = list.get(i);
-            String num = Integer.toString(i + 1);
-            System.out.println(num + "." + t.getDescription());
+            sb.append(i + 1).append(". ").append(t.getDescription()).append("\n");
         }
-        System.out.println(List.getNum());
-        System.out.println(LINE);
+        sb.append(List.getNum()).append("\n");
+        return sb.toString();
     }
 
-    public static void toPrint(ArrayList<Task> TaskList) { //print the list of tasks
-        int len = TaskList.size();
-        System.out.println("____________________________________________________________");
-        for (int i = 0; i < len ; i++) {
-            Task t = list.get(i);
-            String num = Integer.toString(i + 1);
-            System.out.println(num + "." + t.getDescription());
-        }
-        System.out.println(List.getNum());
-        System.out.println("____________________________________________________________");
-    }
 
     public static String getNum() {
         String num = Integer.toString(list.size());
