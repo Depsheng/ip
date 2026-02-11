@@ -26,6 +26,7 @@ public class Deadline extends Task {
 
     public static String extractDes(String input) throws NoDescriptionException { //extract the description from input
         String rest = input.substring("deadline".length());
+        assert input.contains("/by") : "There is no /by to put deadline";
         String[] str = rest.split("/by ");
         String desc = str[0].trim();
 
@@ -39,6 +40,7 @@ public class Deadline extends Task {
         String rest = input.substring("deadline ".length());
         String[] parts = rest.split(" /by ");
         String dl = parts[1].trim().split(" ")[0];//should be in DD-MM-YYYY HR:MN
+        assert dl.length() == 16 : "Date and time not properly trimmed!";
         return LocalDate.parse(dl, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
@@ -46,6 +48,7 @@ public class Deadline extends Task {
         String rest = input.substring("deadline ".length());
         String[] parts = rest.split(" /by ");
         String dl = parts[1].trim().split(" ")[1];//should be in DD-MM-YYYY HR:MN
+        assert dl.length() == 16 : "Date and time not properly trimmed!";
         return LocalTime.parse(dl, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
