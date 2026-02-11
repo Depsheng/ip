@@ -4,13 +4,17 @@ import lala.exception.NoDescriptionException;
 import lala.exception.NoSuchCommandException;
 import java.io.IOException;
 
+/**
+ * Lala class that handles the main application logic.
+ * It coordinates with storage and UI to run the application.
+ */
 public class Lala {
     private Storage storage;
     private Ui ui;
 
     public Lala() throws NoSuchCommandException, NoDescriptionException, IOException {
         this.storage = new Storage();
-        ui = new Ui();
+        this.ui = new Ui();
 
     }
 
@@ -19,6 +23,7 @@ public class Lala {
         StringBuilder sb = new StringBuilder();
         sb.append(ui.showWelcome()).append("\n");
         try {
+            //try to load tasks from the txt file
             List.loadFromTxt();
             sb.append(List.getNum());
         } catch (Exception e) {

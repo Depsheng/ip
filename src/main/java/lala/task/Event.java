@@ -14,10 +14,11 @@ public class Event extends Task {
     LocalTime toTime;
 
     public Event(String description) throws NoDescriptionException { //calls super constructor
-        super(extractDes(description));
+        super(extractDescription(description));
         String[] str = description.split("/from ");
         String fromString = str[1].split("/to ")[0].trim();
         String toString = str[1].split("/to ")[1].trim();
+
         this.from = extractDeadline(fromString);
         this.fromTime = extractDeadlineTime(fromString);
         this.to = extractDeadline(toString);
@@ -26,21 +27,23 @@ public class Event extends Task {
 
     public Event(String description, String from, String dl, boolean b) throws NoDescriptionException { //calls super constructor
         super(description, b);
-        String[] str1 = from.split(", ");
-        this.from = LocalDate.parse(str1[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
-        this.fromTime = LocalTime.parse(str1[1], DateTimeFormatter.ofPattern("HH:mm"));
-        String[] str2 = dl.split(", ");
-        this.to = LocalDate.parse(str2[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
-        this.toTime = LocalTime.parse(str2[1], DateTimeFormatter.ofPattern("HH:mm"));
+
+        String[] fromParts = from.split(", ");
+        this.from = LocalDate.parse(fromParts[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.fromTime = LocalTime.parse(fromParts[1], DateTimeFormatter.ofPattern("HH:mm"));
+
+        String[] toParts = dl.split(", ");
+        this.to = LocalDate.parse(toParts[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.toTime = LocalTime.parse(toParts[1], DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    public static String extractDes(String input) throws NoDescriptionException { //extract the description from input
+    public static String extractDescription(String input) throws NoDescriptionException { //extract the description from input
         String rest = input.substring("event".length());
         String[] str = rest.split("/from ");
         String desc = str[0].trim();
 
         if (desc.isEmpty()) {
-            throw new NoDescriptionException();
+            throw new NoDescriptionException("Description for Event cannot be empty!");
         }
         return desc;
     }
@@ -57,8 +60,8 @@ public class Event extends Task {
 
     private static LocalTime extractDeadlineTime(String input) { // extract the deadline from input
         String[] parts = input.split(" ");
-        String dl = parts[1].trim();//should be in HR:MN
-        return LocalTime.parse(dl, DateTimeFormatter.ofPattern("HH:mm"));
+        String deadline = parts[1].trim();//should be in HR:MN
+        return LocalTime.parse(deadline, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
 

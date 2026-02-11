@@ -6,20 +6,20 @@ public class ToDo extends Task {
 
 
     public ToDo(String description) throws NoDescriptionException { //calls super constructor
-        super(extractDesc(description));
+        super(extractDescription(description));
     }
 
-    public ToDo(String description, boolean b) throws NoDescriptionException { //calls super constructor
-        super(description, b);
+    public ToDo(String description, boolean isDone) throws NoDescriptionException { //calls super constructor
+        super(description, isDone);
     }
 
-    private static String extractDesc(String input) throws NoDescriptionException {
-        String desc = input.substring("todo".length()).trim();
+    private static String extractDescription(String input) throws NoDescriptionException {
+        String description = input.substring("todo".length()).trim();
 
-        if (desc.isEmpty()) {
-            throw new NoDescriptionException();
+        if (description.isEmpty()) {
+            throw new NoDescriptionException("Description for ToDo cannot be empty!");
         }
-        return desc;
+        return description;
     }
 
     @Override
