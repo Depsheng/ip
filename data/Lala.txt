@@ -1,3 +1,2 @@
-D | 1 | lecture | Oct 16 2002, 16:45
 E | 0 | lecture | Oct 16 2002, 16:45 | Oct 16 2002, 17:45
 T | 0 | deadline
