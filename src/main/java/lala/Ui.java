@@ -7,6 +7,7 @@ import lala.task.Event;
 import lala.task.Task;
 import lala.task.ToDo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Ui {
@@ -57,6 +58,19 @@ public class Ui {
         return sb.toString();
     }
 
+    public String processTag(String input) throws IOException {
+        input.trim();
+        String[] words = input.split("\\s+");
+        String taskNumString = words[1];
+        int taskNum = Integer.parseInt(words[1]);
+        if (words[2].equals("remove")) {
+            return List.removeTag(taskNum);
+        } else {
+            String tagString = input.split(taskNumString + " ")[1];
+            return List.addTag(taskNum, tagString);
+        }
+    }
+
     public String handleCommand(String input) {
         try {
             input.trim();
@@ -89,6 +103,8 @@ public class Ui {
                 return this.toPrintKey(keywordList);
             } else if (words[0].equals("bye")) {
                 return this.showBye();
+            } else if (words[0].equals("tag")) {
+                return this.processTag(input);
             } else {
                 throw new NoSuchCommandException();
             }

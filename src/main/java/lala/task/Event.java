@@ -24,8 +24,9 @@ public class Event extends Task {
         this.toTime = extractDeadlineTime(toString);
     }
 
-    public Event(String description, String from, String dl, boolean b) throws NoDescriptionException { //calls super constructor
+    public Event(String description, String from, String dl, boolean b, String tag) throws NoDescriptionException { //calls super constructor
         super(description, b);
+        this.tagTask(tag);
         String[] str1 = from.split(", ");
         this.from = LocalDate.parse(str1[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
         this.fromTime = LocalTime.parse(str1[1], DateTimeFormatter.ofPattern("HH:mm"));

@@ -9,8 +9,9 @@ public class ToDo extends Task {
         super(extractDesc(description));
     }
 
-    public ToDo(String description, boolean b) throws NoDescriptionException { //calls super constructor
+    public ToDo(String description, boolean b, String tag) throws NoDescriptionException { //calls super constructor
         super(description, b);
+        this.tagTask(tag);
     }
 
     private static String extractDesc(String input) throws NoDescriptionException {

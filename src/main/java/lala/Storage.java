@@ -61,19 +61,18 @@ public class Storage {
 
     public static Task parseTask(String line) throws NoDescriptionException {
         String[] str = line.split("\\s*\\|\\s*");
-        if (str.length >= 3 && str.length < 6) {
+        if (str.length > 3 && str.length < 7) {
             String type = str[0];
             boolean bool =  str[1].equals("1");
-            String desc = str[2];
-//            System.out.println(type);
-//            System.out.println(desc);
+            String tag = str[2];
+            String desc = str[3];
             switch (type) {
                 case "T":
-                    return new ToDo(desc, bool);
+                    return new ToDo(desc, bool, tag);
                 case "D":
-                    return new Deadline(desc, str[3], bool);
+                    return new Deadline(desc, str[4], bool, tag);
                 case "E":
-                    return new Event(desc, str[3], str[4], bool);
+                    return new Event(desc, str[4], str[5], bool, tag);
                 default:
                     throw new IllegalArgumentException("Unknown task type" + type);
             }
