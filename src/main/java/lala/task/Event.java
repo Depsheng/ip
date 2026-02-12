@@ -52,12 +52,14 @@ public class Event extends Task {
 //        return " to: " + parts[1].trim() + ")";
         String[] parts = input.split(" ");
         String dl = parts[0];//should be in DD-MM-YYYY
+        assert dl.length() == 10 : "Date not properly trimmed!";
         return LocalDate.parse(dl, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     private static LocalTime extractDeadlineTime(String input) { // extract the deadline from input
         String[] parts = input.split(" ");
         String dl = parts[1].trim();//should be in HR:MN
+        assert dl.length() == 5 : "Time not properly trimmed!";
         return LocalTime.parse(dl, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
