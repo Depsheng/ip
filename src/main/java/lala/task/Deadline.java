@@ -17,8 +17,9 @@ public class Deadline extends Task {
         this.deadlineTime = extractDeadlineTime(description);
     }
 
-    public Deadline(String description, String dl, boolean b) throws NoDescriptionException { //calls super constructor
+    public Deadline(String description, String dl, boolean b, String tag) throws NoDescriptionException { //calls super constructor
         super(description, b);
+        this.tagTask(tag);
         String[] str = dl.split(", ");
         this.deadline = LocalDate.parse(str[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
         this.deadlineTime = LocalTime.parse(str[1], DateTimeFormatter.ofPattern("HH:mm"));

@@ -104,4 +104,33 @@ public class List {
         }
         return keyList;
     }
+
+    public static String removeTag(int n) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        if (n > 0 && n <= list.size()) {
+            Task t =  list.get(n - 1);
+            t.deleteTag();
+            sb.append("Noted. I've removed the tag:\n");
+            sb.append(t.getDescription()).append("\n");
+        } else {
+            sb.append("Sorry! There is no such task.\n");
+        }
+        Storage.saveAll(list);
+        return sb.toString();
+    }
+
+    public static String addTag(int n, String tag) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        if (n > 0 && n <= list.size()) {
+            Task t =  list.get(n - 1);
+            t.tagTask(tag);
+            sb.append("Noted. I've added the tag:\n");
+            sb.append(t.getDescription()).append("\n");
+        } else {
+            sb.append("Sorry! There is no such task.\n");
+        }
+        Storage.saveAll(list);
+        return sb.toString();
+    }
+
 }

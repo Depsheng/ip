@@ -1,2 +1,3 @@
-E | 0 | lecture | Oct 16 2002, 16:45 | Oct 16 2002, 17:45
-T | 0 | deadline
+T | 0 | school | lecture
+D | 0 | school | lecture | Oct 16 2022, 16:45
+E | 0 | NO TAG | MSF workshop | Feb 12 2026, 17:00 | Feb 12 2026, 21:00

@@ -25,13 +25,12 @@ public class Event extends Task {
         this.toTime = extractDeadlineTime(toString);
     }
 
-    public Event(String description, String from, String dl, boolean b) throws NoDescriptionException { //calls super constructor
+    public Event(String description, String from, String dl, boolean b, String tag) throws NoDescriptionException { //calls super constructor
         super(description, b);
-
+        this.tagTask(tag);
         String[] fromParts = from.split(", ");
         this.from = LocalDate.parse(fromParts[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
         this.fromTime = LocalTime.parse(fromParts[1], DateTimeFormatter.ofPattern("HH:mm"));
-
         String[] toParts = dl.split(", ");
         this.to = LocalDate.parse(toParts[0], DateTimeFormatter.ofPattern("MMM d yyyy"));
         this.toTime = LocalTime.parse(toParts[1], DateTimeFormatter.ofPattern("HH:mm"));
