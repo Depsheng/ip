@@ -54,14 +54,16 @@ public class Event extends Task {
 //        String[] parts = str[1].split(" /to ");
 //        return " to: " + parts[1].trim() + ")";
         String[] parts = input.split(" ");
-        String dl = parts[0];//should be in DD-MM-YYYY
-        return LocalDate.parse(dl, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String deadlineString = parts[0];//should be in DD-MM-YYYY
+        assert deadlineString.length() == 10 : "Date not properly trimmed!";
+        return LocalDate.parse(deadlineString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     private static LocalTime extractDeadlineTime(String input) { // extract the deadline from input
         String[] parts = input.split(" ");
-        String deadline = parts[1].trim();//should be in HR:MN
-        return LocalTime.parse(deadline, DateTimeFormatter.ofPattern("HH:mm"));
+        String deadlineString = parts[1].trim();//should be in HR:MN
+        assert deadlineString.length() == 5 : "Time not properly trimmed!";
+        return LocalTime.parse(deadlineString, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
 

@@ -24,6 +24,9 @@ public class Main extends Application {
         try {
             lala = new Lala();
 
+            // Assert that lala is not null
+            assert lala != null : "Lala is null!"; // Assertion to check lala is initialized
+
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = loader.load();
 
