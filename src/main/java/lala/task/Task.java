@@ -6,11 +6,11 @@ public class Task {
 
     public Task(String description) { //Constructor of Task
         this.description = description;
-        isDone = false;
+        this.isDone = false;
     }
     public Task(String description, boolean b) { //Constructor of Task
         this.description = description;
-        isDone = b;
+        this.isDone = b;
     }
 
     public String getDescription() { // To print out description of task and whether it is done
