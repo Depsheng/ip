@@ -34,8 +34,16 @@ public class Storage {
      */
     private static void doesFileExist() throws IOException {
         Path path = Paths.get(FILE_PATH);
+
+        // Create ./data if it doesn't exist
+        Path parent = path.getParent();
+        if (parent != null && !Files.exists(parent)) {
+            Files.createDirectories(parent);
+        }
+
+        // Create Lala.txt if it doesn't exist
         if (!Files.exists(path)) {
-            throw new IOException("File Does Not Exist!");
+            Files.createFile(path);
         }
     }
 

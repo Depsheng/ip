@@ -1,1 +1,3 @@
-E | 0 | GEN2070Y | MSF workshop | Feb 12 2026, 17:00 | Feb 12 2026, 21:00
+T | 0 | school | lecture
+D | 0 | NO TAG | tutorial | Feb 16 2026, 16:00
+D | 0 | NO TAG | lecture | Oct 16 2026, 16:00

@@ -41,7 +41,7 @@ public class Deadline extends Task {
         String rest = input.substring("deadline ".length());
         String[] parts = rest.split(" /by ");
         String deadlineString = parts[1].trim().split(" ")[0];//should be in DD-MM-YYYY HR:MN
-        assert deadlineString.length() == 16 : "Date and time not properly trimmed!";
+        assert deadlineString.length() == 10 : "Date not properly trimmed!";
         return LocalDate.parse(deadlineString, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
@@ -49,7 +49,7 @@ public class Deadline extends Task {
         String rest = input.substring("deadline ".length());
         String[] parts = rest.split(" /by ");
         String deadlineString = parts[1].trim().split(" ")[1];//should be in DD-MM-YYYY HR:MN
-        assert deadlineString.length() == 16 : "Date and time not properly trimmed!";
+        assert deadlineString.length() == 5 : "Time not properly trimmed!";
         return LocalTime.parse(deadlineString, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
