@@ -22,11 +22,16 @@ import java.util.ArrayList;
 public class Storage {
     private static final String FILE_PATH = "./data/Lala.txt";
 
+    /**
+     * Creates storage and verifies the data file exists.
+     */
     public Storage() throws IOException {
         doesFileExist();
     }
 
-    // checks if the file exists
+    /**
+     * Ensures the data file exists before any read/write operations.
+     */
     private static void doesFileExist() throws IOException {
         Path path = Paths.get(FILE_PATH);
         if (!Files.exists(path)) {
@@ -34,22 +39,30 @@ public class Storage {
         }
     }
 
-    // loads the tasks from input file and returns a List of Task objects
+    /**
+     * Loads tasks from disk and returns them as a list.
+     */
     public static ArrayList<Task> load() throws IOException, NoDescriptionException {
         ArrayList<Task> tasks = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim();
-                if (line.isEmpty()) continue;
+                if (line.isEmpty()) {
+                    continue;
+                }
                 Task t = parseTask(line);
-                if (t != null) tasks.add(t);
+                if (t != null) {
+                    tasks.add(t);
+                }
             }
         }
         return tasks;
     }
 
-    // saves all tasks into input file currently in TaskList
+    /**
+     * Persists all tasks to disk in the storage format.
+     */
     public static void saveAll(ArrayList<Task> tasks) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Task t : tasks) {
@@ -59,11 +72,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a single serialized line into a Task instance.
+     */
     public static Task parseTask(String line) throws NoDescriptionException {
         String[] str = line.split("\\s*\\|\\s*");
         if (str.length > 3 && str.length < 7) {
             String type = str[0];
-            boolean bool =  str[1].equals("1");
+            boolean bool = str[1].equals("1");
             String tag = str[2];
             String desc = str[3];
             switch (type) {

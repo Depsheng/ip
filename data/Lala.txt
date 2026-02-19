@@ -1,3 +1,4 @@
-T | 0 | school | lecture
-D | 0 | school | lecture | Oct 16 2022, 16:45
+T | 1 | school | lecture
+D | 0 | NO TAG | lecture | Oct 16 2022, 16:45
 E | 0 | NO TAG | MSF workshop | Feb 12 2026, 17:00 | Feb 12 2026, 21:00
+T | 0 | NO TAG | java
