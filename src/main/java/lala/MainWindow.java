@@ -54,16 +54,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws NoSuchCommandException, NoDescriptionException, IOException {
         String input = userInput.getText();
         String response = lala.getResponse(input);
-        if (input.equalsIgnoreCase("bye")) {
-            dialogContainer.getChildren().add(DialogBox.getLalaDialog(response, lalaImage));
-            PauseTransition pause = new PauseTransition(Duration.seconds(5));
-            pause.setOnFinished(e -> Platform.exit());
-            pause.play();
-        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getLalaDialog(response, lalaImage)
         );
+        if (input.equalsIgnoreCase("bye")) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            pause.setOnFinished(e -> Platform.exit());
+            pause.play();
+        }
         userInput.clear();
     }
 }
