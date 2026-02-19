@@ -1,24 +1,37 @@
 package lala.task;
 
 public class Task {
-    private final String description; //description of Task
-    private boolean isDone; //whether the Task is marked as Done
+    private final String description;
+    private boolean isDone;
     private String tag;
 
-    public Task(String description) { //Constructor of Task
+    /**
+     * Creates a new task with the given description and an empty tag.
+     */
+    public Task(String description) {
         this.description = description;
         this.isDone = false;
         this.tag = "";
     }
-    public Task(String description, boolean b) { //Constructor of Task
+
+    /**
+     * Creates a new task with the given description and completion state.
+     */
+    public Task(String description, boolean b) {
         this.description = description;
         this.isDone = b;
     }
 
-    public String getDescription() { // To print out description of task and whether it is done
+    /**
+     * Returns a display string including completion status, tag, and description.
+     */
+    public String getDescription() {
         return this.getBoolean() + this.getTag() + this.description;
     }
 
+    /**
+     * Returns a formatted tag prefix for display, or an empty string if no tag exists.
+     */
     public String getTag() {
         if (this.tag.isEmpty()) {
             return "";
@@ -27,7 +40,10 @@ public class Task {
         }
     }
 
-    public String getBoolean() { //Responsible for printing the [ ] whether done or not
+    /**
+     * Returns the completion marker for display.
+     */
+    public String getBoolean() {
         if (this.isDone) {
             return "[X] ";
         } else {
@@ -35,27 +51,40 @@ public class Task {
         }
     }
 
-    public void set(boolean b) { // mark/unmark
+    /**
+     * Marks or unmarks the task as done.
+     */
+    public void set(boolean b) {
         this.isDone = b;
     }
 
+    /**
+     * Serializes the task to a file-friendly string format.
+     */
     public String toFileString() {
         String b = this.isDone ? "1" : "0";
         String tag = this.tag.isEmpty() ? " | " + "NO TAG" + " | " : " | " + this.tag + " | ";
         return b + tag + this.description;
-    };
+    }
 
-    //checks if Description contains the keyword
+    /**
+     * Returns true if the description contains the given keyword.
+     */
     public boolean hasKey(String key) {
         return this.description.contains(key);
     }
 
-    //tagging feature to add a tag to task
+    /**
+     * Assigns a tag to the task.
+     */
     public void tagTask(String tag) {
         this.tag = tag;
     }
 
-    public void deleteTag(){
+    /**
+     * Clears the task tag.
+     */
+    public void deleteTag() {
         this.tag = "";
     }
 }
