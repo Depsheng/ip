@@ -27,17 +27,17 @@ public class Ui {
 
     // prints the NoSuchCommandException
     public String showErrorUnknownCommand() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means.";
+        return "OOPS!!! I'm sorry, but I don't know what that means.";
     }
 
     // prints the NoDescription Exception
     public String showErrorEmptyDescription() {
-        return "☹ OOPS!!! The description of a task cannot be empty.";
+        return "OOPS!!! The description of a task cannot be empty.";
     }
 
 
     public String showErrorGeneric(String msg) {
-        return "☹ OOPS!!! Something went wrong: " + msg;
+        return "OOPSIES!!! Something went wrong!!!";
     }
 
     public String toPrintKey(ArrayList<Task> TaskList) { //print the list of tasks
